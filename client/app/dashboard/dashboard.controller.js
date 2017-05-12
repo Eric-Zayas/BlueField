@@ -47,7 +47,7 @@ angular.module('app.dashboard', [
               angular.lowercase(job.position).indexOf(angular.lowercase($scope.search) || '') !== -1);
   };
 
-  $scope.reviews;
+  // $scope.reviews;
   $scope.queryGlassdoor = function(){
     $http({
       method: "POST",
@@ -57,8 +57,8 @@ angular.module('app.dashboard', [
       }
     }).then(function(response){
 
-      console.log(response.data);
-      $scope.reviews = response.data;
+      console.log(response);
+      // $scope.reviews = response.data;
 
     })
   };
