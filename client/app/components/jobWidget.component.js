@@ -55,8 +55,13 @@ angular.
             <p class="md-subhead"><strong>Description: </strong>{{$ctrl.data.description}}</p>
             <p class="md-subhead"><strong>Founded: </strong>{{$ctrl.data.founded}}</p>
             <p class="md-subhead"><strong># of Employees: </strong>{{$ctrl.data.approxEmployees}}</p>
-            <p class="md-subhead"><strong>Featured Review: </strong>{{$scope.reviews}}</p><br><a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
-            <md-button ng-click="$ctrl.queryGlassdoor()">Submit</md-button>
+            <p class="md-subhead"><strong>Average Rating:{{averageRating}}</strong>
+            <br>
+            <strong>Pros:</strong>{{pros}}
+            <br>
+            <strong>Cons: </strong>{{cons}}
+            </p><br><a href='https://www.glassdoor.com/index.htm'>powered by <img src='https://www.glassdoor.com/static/img/api/glassdoor_logo_80.png' title='Job Search' /></a>
+            <md-button ng-click="$ctrl.queryGlassdoor()">Get Glassdoor Review!</md-button>
             <p class="md-subhead" ><strong>Address: </strong>{{$ctrl.data.address}}</p>
 
             <md-button ng-click="$ctrl.googleMap($ctrl.data.address, $ctrl.data.officialName)">Show Map</md-button>
@@ -108,9 +113,12 @@ angular.
 
     controller: function($window, $scope, $route, $mdDialog, Jobs, GoogleMap, $rootScope) {
 
+<<<<<<< HEAD
 
       // favorite icon
 
+=======
+>>>>>>> displayData
       this.favorite = false;
 
       Jobs.get().then(function(data) {
@@ -193,18 +201,33 @@ angular.
       //                         'Error: Your browser doesn\'t support geolocation.');
       // }
 
-      $scope.reviews;;
 
-      this.queryGlassdoor = function(){
+
+      this.queryGlassdoor = function() {
+        console.log("this should be meetup: " +  JSON.stringify($scope.jobs[0].company));
+        console.log("this should be squarespace: " + JSON.stringify($scope.jobs[1].company));
+        console.log(this);
+
         $http({
           method: "POST",
           url: "/api/glassdoor",
           data : {
-            q : $scope.searchGlassdoor
+            q : this.data.company
           }
+          // console.log($scope.jobs[1].company)
         }).then(function(response){
+
           console.log("response From queryGlassdoor:" + response);
             $scope.reviews = response.data;
+
+            // console.log('hello world');
+
+            let parsedBody = JSON.parse(response.data.body);
+
+            $scope.pros = parsedBody.response.employers[0].featuredReview.pros;
+            $scope.cons = parsedBody.response.employers[0].featuredReview.cons;
+            $scope.averageRating = parsedBody.response.employers[0].overallRating;
+
 
         })
       };
