@@ -455,6 +455,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 		rp(options)
 		.then(function(response) {
 			// console.log("This is response!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: ", response);
+
 			res.status(200).send(response);
 		})
 		.catch(function(err) {
@@ -464,7 +465,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 
 	app.post('/api/directionData', function(req, res) {
 		console.log('I get the DATAAAAAAAAAAAAAAAAA from client!!!', req.body.origin);
-		
+
 		let origin = req.body.origin;
 		let destination = req.body.destination;
 		let mode = req.body.mode.toLowerCase();
@@ -483,6 +484,7 @@ app.use(bodyparser.urlencoded({extended:true}));
 		rp(options)
 		.then(function(response) {
 			console.log("This is response!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: ", response);
+
 			res.status(200).send(response);
 		})
 		.catch(function(err) {

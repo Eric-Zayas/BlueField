@@ -300,6 +300,7 @@ angular.
             <md-button ng-click="$ctrl.googleMap($ctrl.data.address, $ctrl.data.officialName)">Show Map</md-button>
 
 
+
             </md-content>
           </md-tab>
 
@@ -342,7 +343,9 @@ angular.
      data: '='
     },
 
+
     controller: function($window, $scope, $route, $mdDialog, Jobs, GoogleMap, $rootScope) {
+
 
       // favorite icon
 
@@ -390,9 +393,6 @@ angular.
       }
 
 
-
-
-      ////////////////////Google Map///////////////////////////////////////////
       this.googleMap = function(address, companyName) {
         $rootScope.displayMapFunc();
         $rootScope.getAddressData(address);
@@ -401,6 +401,7 @@ angular.
         window.scrollTo(0,400);
         GoogleMap.getLocationCode(address)
         .then(function(data){
+
           var mapProp = {
           center:data,
           zoom:12,
@@ -423,7 +424,6 @@ angular.
       }
 
 
-
       // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       //   infoWindow.setPosition(pos);
       //   infoWindow.setContent(browserHasGeolocation ?
@@ -442,8 +442,8 @@ angular.
           }
         }).then(function(response){
           console.log("response From queryGlassdoor:" + response);
-        }).catch(function(err){
-          console.log(err);
+            $scope.reviews = response.data;
+
         })
       };
 
