@@ -349,14 +349,9 @@ angular.
     },
 
 
-    controller: function($window, $scope, $route, $mdDialog, Jobs, GoogleMap, $rootScope) {
+    controller: function($window, $http, $scope, $route, $mdDialog, Jobs, GoogleMap, $rootScope) {
 
-<<<<<<< HEAD
 
-      // favorite icon
-
-=======
->>>>>>> displayData
       this.favorite = false;
 
       Jobs.get().then(function(data) {
